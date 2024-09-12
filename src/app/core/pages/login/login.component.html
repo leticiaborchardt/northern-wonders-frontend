@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm" (ngSubmit)="handleLogin()" autocomplete="off" class="w-full" novalidate>
+  <div class="mb-5">
+    <label for="login" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+    <input type="email" id="login" class="form-control" placeholder="E-mail" formControlName="login">
+    @if(loginForm.get('login')?.hasError('required') && loginForm.get('login')?.touched){
+    <div class="form-error">E-mail is required</div>
+    }
+  </div>
+  <div class="mb-5">
+    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="Password" formControlName="password">
+    @if(loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched){
+    <div class="form-error">Password is required</div>
+    }
+  </div>
+
+  <a routerLink="/register">Sign in</a>
+
+  <button type="submit"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+</form>
