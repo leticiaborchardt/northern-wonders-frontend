@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { User } from '../models/user.model';
 import { Login, LoginResponse } from '../models/login.model';
-import { Customer, NewCustomerUser } from '../models/customer.model';
 
 @Injectable({
   providedIn: 'root'

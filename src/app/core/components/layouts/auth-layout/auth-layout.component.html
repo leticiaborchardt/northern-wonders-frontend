@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<div class="h-screen flex">
+  <div class="w-full md:w-1/2">
+    <div class="w-full md:w-1/2 p-12 fixed flex justify-between">
+      <a class="text-3xl font-bold leading-none" routerLink="/home">
+        <img class="h-10" alt="logo" src="/assets/logo.png">
+      </a>
+      <div class="flex items-center gap-6">
+        <img src="/assets/icons/instagram.svg" alt="Instagram" class="h-5">
+        <img src="/assets/icons/twitter.svg" alt="X" class="h-5">
+        <img src="/assets/icons/facebook.svg" alt="Facebook" class="h-5">
+      </div>
+    </div>
+    <div class="h-full flex justify-center items-center">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="hidden md:block w-1/2">
+    <app-image-slider></app-image-slider>
+  </div>
+</div>

@@ -1,8 +1,11 @@
 import {
   Component,
-  inject,
+  ChangeDetectionStrategy,
   OnInit
 } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import {
   FormGroup,
   FormBuilder,
@@ -19,7 +22,8 @@ import { AlertService } from '../../services/alert.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink, MatFormFieldModule, MatInputModule, MatIconModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

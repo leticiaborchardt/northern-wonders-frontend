@@ -1,0 +1,11 @@
+<div class="relative w-full h-screen overflow-hidden">
+  <div class="flex h-screen transition-transform ease-linear duration-1000" [style.transform]="getCarouselTransform()">
+    <div *ngFor="let image of images" class="w-full flex-shrink-0 h-full">
+      <img [src]="image" class="bg-image object-cover h-full" alt="Carousel Image" loading="eager">
+    </div>
+  </div>
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <div *ngFor="let image of images; let i = index" class="w-8 h-1 rounded-sm cursor-pointer" [ngClass]="{'bg-stone-800': i === currentIndex, 'bg-white': i !== currentIndex}" (click)="goToSlide(i)">
+    </div>
+  </div>
+</div>

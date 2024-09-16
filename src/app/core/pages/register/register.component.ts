@@ -6,11 +6,14 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Customer } from '../../models/customer.model';
 import { CommonModule } from '@angular/common';
 import { CustomerService } from '../../../features/services/customer.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink, MatFormFieldModule, MatInputModule, MatDatepickerModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -36,18 +39,12 @@ export class RegisterComponent {
 
   handleSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
-      
       this.customerService.createCustomer(this.form.value).subscribe({
         next: (res: Customer) => {
-          console.log(res);
-          
           this.alertService.showAlert('User created successfully!', 'success');
           this.router.navigate(["/login"]);
         },
         error: (error) => {
-          console.log(error);
-          
           this.alertService.showAlert('error', 'error');
         }
       })

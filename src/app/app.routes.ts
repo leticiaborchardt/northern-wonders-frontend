@@ -16,14 +16,8 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent
-      }
-    ]
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: '',

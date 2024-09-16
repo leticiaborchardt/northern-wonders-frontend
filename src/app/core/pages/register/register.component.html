@@ -1,1 +1,52 @@
-User customer form
+<div class="px-8 md:px-0 md:w-[450px]">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="space-y-4 md:space-y-6">
+    <h1 class="text-xl font-bold md:text-2xl">Register Account</h1>
+    <div formGroupName="user" class="grid md:grid-cols-2 gap-2">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="login" id="login" type="email" placeholder="name@example.com">
+        <mat-error *ngIf="form.get('user.login')?.hasError('required') && form.get('user.login')?.touched">Email is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" id="password" type="password" placeholder="••••••••">
+        <mat-error *ngIf="form.get('user.password')?.hasError('required') && form.get('user.password')?.touched">Password is required!</mat-error>
+      </mat-form-field>
+    </div>
+    <div formGroupName="customer" class="grid grid-cols-2 gap-2">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" id="name" type="text" placeholder="Your name">
+        <mat-error *ngIf="form.get('customer.name')?.hasError('required') && form.get('customer.name')?.touched">Name is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" id="phone" type="tel" placeholder="(123) 456-7890">
+        <mat-error *ngIf="form.get('customer.phone')?.hasError('required') && form.get('customer.phone')?.touched">Phone is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" id="birthDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('customer.birthDate')?.hasError('required') && form.get('customer.birthDate')?.touched">Birth Date is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Document Number</mat-label>
+        <input matInput formControlName="documentNumber" id="documentNumber" type="text" placeholder="Document Number">
+        <mat-error *ngIf="form.get('customer.documentNumber')?.hasError('required') && form.get('customer.documentNumber')?.touched">Document Number is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-span-2">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" id="address" type="text" placeholder="Address">
+        <mat-error *ngIf="form.get('customer.address')?.hasError('required') && form.get('customer.address')?.touched">Address is required!</mat-error>
+      </mat-form-field>
+    </div>
+    <button type="submit" class="w-full py-2 px-6 bg-stone-800 hover:bg-stone-900 text-sm text-white font-bold rounded-sm transition duration-200">
+      Register
+    </button>
+    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+      Already have an account? <a routerLink="/login" class="font-medium text-sky-600 hover:underline">Sign in</a>
+    </p>
+  </form>
+</div>
