@@ -1,3 +1,4 @@
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
@@ -18,6 +19,10 @@ const matFormFieldDefaultOptions: MatFormFieldDefaultOptions = {
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: matFormFieldDefaultOptions
+    },
+    {
+      provide: DATE_PIPE_DEFAULT_OPTIONS,
+      useValue: { dateFormat: "MM/dd/Y" }
     }
   ]
 })

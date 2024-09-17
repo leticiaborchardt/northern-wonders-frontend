@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Login, LoginResponse } from '../models/login.model';
+import { UserRole } from '../models/user-role';
+import { JwtPayload } from '../models/jwt-payload.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    this.removeAuthToken();
     return this.httpClient.post<any>(`${this.url}/logout`, null);
   }
 
@@ -26,7 +29,8 @@ export class AuthService {
   }
 
   getUserRole(): string {
-    return jwtDecode(this.getAuthToken() ?? '').sub ?? '';
+    let token = this.getAuthToken();
+    return token ? jwtDecode<JwtPayload>(token).role : '';
   }
 
   getAuthToken(): string | null {

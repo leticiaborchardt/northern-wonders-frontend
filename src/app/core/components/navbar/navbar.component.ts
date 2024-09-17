@@ -1,19 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, Renderer2 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, Input, Renderer2 } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserRole } from '../../models/user-role';
+import { HasPermissionDirective } from '../../directives/has-permission.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, HasPermissionDirective],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  isNavbarOpen:boolean = false;
+  isNavbarOpen: boolean = false;
+  @Input() showBackground: boolean = false;
+  @Input() position: string = 'sticky';
 
-  constructor(private authService: AuthService, private renderer: Renderer2) {}
+  constructor(private authService: AuthService, private router: Router, private renderer: Renderer2) { }
 
   toggleNavbar() {
     this.isNavbarOpen = !this.isNavbarOpen;
@@ -28,9 +32,9 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {
-        this.authService.removeAuthToken();
+        this.router.navigateByUrl('/home');
       },
-      error: (error) => console.log(error)      
+      error: (error) => console.log(error)
     });
   }
 

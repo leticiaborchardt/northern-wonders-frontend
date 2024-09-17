@@ -8,6 +8,8 @@ import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { HomeComponent } from './features/pages/home/home.component';
 import { NotFoundComponent } from './core/pages/errors/not-found/not-found.component';
+import { TravelPackagesComponent } from './features/pages/travel-packages/travel-packages.component';
+import { UserRole } from './core/models/user-role';
 
 export const routes: Routes = [
   {
@@ -38,7 +40,11 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivateChild: [authGuard, roleGuard],
     children: [
-      // Rotas protegidas
+      {
+        path: 'travel-packages',
+        component: TravelPackagesComponent,
+        data: { roles: [UserRole.ADMIN, UserRole.CLIENT] }
+      }
     ]
   },
   {

@@ -1,0 +1,84 @@
+<h1 mat-dialog-title class="mb-6">{{ data ? 'Update' : 'Create' }} Travel Package</h1>
+<mat-dialog-content>
+  <form [formGroup]="travelPackageForm" class="space-y-4 md:space-y-6">
+    <div class="grid md:grid-cols-2 gap-2">
+      <mat-form-field>
+        <mat-label>Destination</mat-label>
+        <mat-select formControlName="destination">
+          <mat-option *ngFor="let destination of destinations" [value]="destination">{{ destination.city }} - {{destination.region}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="travelPackageForm.get('destination')?.hasError('required') && travelPackageForm.get('destination')?.touched">
+          Destination is required!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Package Name</mat-label>
+        <input matInput formControlName="name" id="name" type="text" placeholder="Package name">
+        <mat-error *ngIf="travelPackageForm.get('name')?.hasError('required') && travelPackageForm.get('name')?.touched">
+          Name is required!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" id="description" placeholder="Description"></textarea>
+      <mat-error *ngIf="travelPackageForm.get('description')?.hasError('required') && travelPackageForm.get('description')?.touched">
+        Description is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Image URL</mat-label>
+      <input matInput formControlName="imageUrl" id="imageUrl" placeholder="Image URL">
+      <mat-error *ngIf="travelPackageForm.get('imageUrl')?.hasError('required') && travelPackageForm.get('imageUrl')?.touched">
+        Image URL is required!
+      </mat-error>
+    </mat-form-field>
+
+    <div class="grid md:grid-cols-2 gap-2">
+      <mat-form-field>
+        <mat-label>Hotel Name</mat-label>
+        <input matInput formControlName="hotelName" id="hotelName" type="text" placeholder="Hotel name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Airline</mat-label>
+        <input matInput formControlName="airline" id="airline" type="text" placeholder="Airline">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Flight Number</mat-label>
+        <input matInput formControlName="flightNumber" id="flightNumber" type="text" placeholder="Flight number">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" id="price" type="number" placeholder="Price">
+        <span matTextPrefix>$&nbsp;</span>
+        <mat-error *ngIf="travelPackageForm.get('price')?.hasError('required') && travelPackageForm.get('price')?.touched">
+          Price is required!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="grid">
+      <mat-form-field>
+        <mat-label>Start/End Date</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" id="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" id="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-error *ngIf="travelPackageForm.get('startDate')?.hasError('required') && travelPackageForm.get('startDate')?.touched">
+          Start Date is required!
+        </mat-error>
+        <mat-error *ngIf="travelPackageForm.get('endDate')?.hasError('required') && travelPackageForm.get('endDate')?.touched">
+          End Date is required!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="closeModal()" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800  focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center inline-flex items-center me-2">Cancel</button>
+  <button (click)="handleSubmit()" class="text-teal-700 hover:text-white border border-teal-700 hover:bg-teal-800  focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center inline-flex items-center me-2">Save</button>
+</mat-dialog-actions>

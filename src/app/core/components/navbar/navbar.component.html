@@ -1,4 +1,4 @@
-<nav class="fixed z-30 w-full top-0 py-4 flex justify-between items-center px-[10%]">
+<nav class="{{position}} z-30 w-full top-0 py-4 flex justify-between items-center px-[10%]" [ngClass]="{'backdrop-blur-lg': showBackground}">
   <a class="text-3xl font-bold leading-none" routerLink="/home">
     <img class="h-10" alt="logo" src="/assets/logo.png" [ngClass]="{'hidden': isNavbarOpen}">
   </a>
@@ -10,24 +10,34 @@
     </button>
   </div>
   <ul class="h-full px-8 rounded-b-3xl hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-12 text-stone-700 text-sm">
-    <li>
+    <li *ngIf="isUserLoggedIn()">
       <a routerLink="/home" class="text-base m-6 group relative w-max">
         <span>Home</span>
         <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
         <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
       </a>
-    <li>
-      <a routerLink="/home" class="text-base m-6 group relative w-max">
+    </li>
+    <li *appHasPermission="'ADMIN'">
+      <a routerLink="/travel-packages" class="text-base m-6 group relative w-max">
+        <span>Travel Packages</span>
+        <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
+        <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
+      </a>
+    </li>
+    <li *appHasPermission="'CLIENT'">
+      <a routerLink="/travel-packages" class="text-base m-6 group relative w-max">
         <span>Plan Your Trip</span>
         <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
         <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
       </a>
-    <li>
-      <a routerLink="/home" class="text-base m-6 group relative w-max">
+    </li>
+    <li *appHasPermission="'CLIENT'">
+      <a routerLink="/bookings" class="text-base m-6 group relative w-max">
         <span>My Bookings</span>
         <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
         <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
       </a>
+    </li>
   </ul>
   <a *ngIf="!isUserLoggedIn()" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-stone-50 hover:bg-stone-100 text-sm text-stone-900 rounded-sm font-bold transition duration-200" routerLink="/login">Sign In</a>
   <a *ngIf="!isUserLoggedIn()" class="hidden lg:inline-block py-2 px-6 bg-stone-700 hover:bg-stone-800 text-sm text-white font-bold rounded-sm transition duration-200" routerLink="/register">Sign up</a>
@@ -47,15 +57,18 @@
         </svg>
       </button>
     </div>
-    <ul>
+    <ul *ngIf="isUserLoggedIn()">
       <li class="mb-1">
         <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/home">Home</a>
       </li>
-      <li class="mb-1">
-        <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/home">Plan Your Trip</a>
+      <li class="mb-1" *appHasPermission="'ADMIN'">
+        <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/travel-packages">Travel Packages</a>
       </li>
-      <li class="mb-1">
-        <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/home">My Bookings</a>
+      <li class="mb-1" *appHasPermission="'CLIENT'">
+        <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/travel-packages">Plan Your Trip</a>
+      </li>
+      <li class="mb-1" *appHasPermission="'CLIENT'">
+        <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/bookings">My Bookings</a>
       </li>
     </ul>
     <div class="mt-auto">
@@ -64,7 +77,7 @@
         <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-stone-700 hover:bg-stone-800 rounded-sm" routerLink="/register">Sign Up</a>
       </div>
       <div class="pt-6" *ngIf="isUserLoggedIn()">
-        <button (click)="logout()" class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-stone-700 hover:bg-stone-800 rounded-sm">Logout</button>
+        <button (click)="logout()" class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-stone-700 hover:bg-stone-800 rounded-sm w-full">Logout</button>
       </div>
       <p class="mt-6 text-xs text-center text-gray-400">
         <span>Copyright © 2024</span>
