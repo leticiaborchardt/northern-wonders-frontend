@@ -1,6 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { UserRole } from '../models/user-role';
 
 @Directive({
   selector: '[appHasPermission]',

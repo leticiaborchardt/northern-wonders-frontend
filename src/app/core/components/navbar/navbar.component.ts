@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Renderer2 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { UserRole } from '../../models/user-role';
 import { HasPermissionDirective } from '../../directives/has-permission.directive';
 import { MatIcon } from '@angular/material/icon';
 
@@ -13,12 +12,17 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isNavbarOpen: boolean = false;
+  isUserLoggedIn: boolean = false;
   @Input() showBackground: boolean = false;
   @Input() position: string = 'sticky';
 
-  constructor(private authService: AuthService, private router: Router, private renderer: Renderer2) { }
+  constructor(private authService: AuthService, private renderer: Renderer2) { }
+
+  ngOnInit(): void {
+    this.checkUserLoggedIn();
+  }
 
   toggleNavbar() {
     this.isNavbarOpen = !this.isNavbarOpen;
@@ -33,13 +37,16 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {
-        this.router.navigateByUrl('/home');
+        this.authService.removeAuthToken();
+        this.checkUserLoggedIn();
+
+        window.location.reload();
       },
       error: (error) => console.log(error)
     });
   }
 
-  isUserLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+  checkUserLoggedIn(): void {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
   }
 }

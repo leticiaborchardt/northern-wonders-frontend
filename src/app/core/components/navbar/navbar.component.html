@@ -8,7 +8,7 @@
     </button>
   </div>
   <ul class="h-full px-8 rounded-b-3xl hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-12 text-stone-700 text-sm">
-    <li *ngIf="isUserLoggedIn()">
+    <li *ngIf="isUserLoggedIn">
       <a routerLink="/home" class="text-base m-6 group relative w-max">
         <span>Home</span>
         <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-stone-800 group-hover:w-3/6"></span>
@@ -37,9 +37,9 @@
       </a>
     </li>
   </ul>
-  <a *ngIf="!isUserLoggedIn()" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-stone-50 hover:bg-stone-100 text-sm text-stone-900 rounded-sm font-bold transition duration-200" routerLink="/login">Sign In</a>
-  <a *ngIf="!isUserLoggedIn()" class="hidden lg:inline-block py-2 px-6 bg-stone-700 hover:bg-stone-800 text-sm text-white font-bold rounded-sm transition duration-200" routerLink="/register">Sign up</a>
-  <button *ngIf="isUserLoggedIn()" (click)="logout()" class="hidden lg:inline-block py-2 px-6 bg-stone-700 hover:bg-stone-800 text-sm text-white font-bold rounded-sm transition duration-200">Logout</button>
+  <a *ngIf="!isUserLoggedIn" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-stone-50 hover:bg-stone-100 text-sm text-stone-900 rounded-sm font-bold transition duration-200" routerLink="/login">Sign In</a>
+  <a *ngIf="!isUserLoggedIn" class="hidden lg:inline-block py-2 px-6 bg-stone-700 hover:bg-stone-800 text-sm text-white font-bold rounded-sm transition duration-200" routerLink="/register">Sign up</a>
+  <button *ngIf="isUserLoggedIn" (click)="logout()" class="hidden lg:inline-block py-2 px-6 bg-stone-700 hover:bg-stone-800 text-sm text-white font-bold rounded-sm transition duration-200">Logout</button>
 </nav>
 
 <div [ngClass]="{'hidden': !isNavbarOpen}">
@@ -53,7 +53,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <ul *ngIf="isUserLoggedIn()">
+    <ul *ngIf="isUserLoggedIn">
       <li class="mb-1">
         <a class="block p-4 text-base font-semibold text-stone-900 hover:bg-stone-50 hover:text-stone-600 rounded" routerLink="/home">Home</a>
       </li>
@@ -68,11 +68,11 @@
       </li>
     </ul>
     <div class="mt-auto">
-      <div class="pt-6" *ngIf="!isUserLoggedIn()">
+      <div class="pt-6" *ngIf="!isUserLoggedIn">
         <a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold bg-gray-50 hover:bg-gray-100 rounded-sm" routerLink="/login">Sign in</a>
         <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-stone-700 hover:bg-stone-800 rounded-sm" routerLink="/register">Sign Up</a>
       </div>
-      <div class="pt-6" *ngIf="isUserLoggedIn()">
+      <div class="pt-6" *ngIf="isUserLoggedIn">
         <button (click)="logout()" class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-stone-700 hover:bg-stone-800 rounded-sm w-full">Logout</button>
       </div>
       <p class="mt-6 text-xs text-center text-gray-400">
