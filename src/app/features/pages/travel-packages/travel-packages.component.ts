@@ -7,21 +7,27 @@ import { HasPermissionDirective } from '../../../core/directives/has-permission.
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TravelPackageModalComponent } from '../../components/travel-package-modal/travel-package-modal.component';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { NoDataFoundComponent } from '../../components/no-data-found/no-data-found.component';
 
 @Component({
   selector: 'app-travel-packages',
   standalone: true,
-  imports: [CommonModule, HasPermissionDirective, MatDialogModule],
+  imports: [CommonModule, HasPermissionDirective, MatDialogModule, MatProgressSpinnerModule, MatIconModule, NoDataFoundComponent],
   templateUrl: './travel-packages.component.html',
   styleUrl: './travel-packages.component.scss'
 })
 export class TravelPackagesComponent implements OnInit {
   travelPackages: TravelPackage[] = [];
+  loading: boolean = false;
   readonly dialog = inject(MatDialog);
 
   constructor(
     private travelPackageService: TravelPackageService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,48 +35,52 @@ export class TravelPackagesComponent implements OnInit {
   }
 
   getTravelPackages(): void {
+    this.loading = true;
+
     this.travelPackageService.getTravelPackages().subscribe({
       next: (response) => {
         this.travelPackages = response;
       },
-      error: () => this.alertService.showAlert('Unable to load items, please try again later.', 'error')
+      error: () => this.alertService.showAlert('Unable to load items, please try again later.', 'error'),
+      complete: () => this.loading = false
     })
   }
 
-  openCreateModal(): void {
-    const dialogRef = this.dialog.open(TravelPackageModalComponent);
+  openDetailsPage(id: string): void {
+    this.router.navigate(['/travel-package', id]);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      // update list
-    });
+  openCreateModal(): void {
+    this.dialog.open(TravelPackageModalComponent)
+      .afterClosed()
+      .subscribe(result => {
+        this.getTravelPackages();
+      });
   }
 
   openEditModal(travelPackage: TravelPackage): void {
-    const dialogRef = this.dialog.open(TravelPackageModalComponent, {
-      data: travelPackage
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // update list
-    });
+    this.dialog.open(TravelPackageModalComponent, { data: travelPackage })
+      .afterClosed()
+      .subscribe(result => {
+        this.getTravelPackages();
+      });
   }
 
   deleteTravelPackage(id: string): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    this.dialog.open(ConfirmDialogComponent, {
       data: { message: `Are you sure you want to delete this travel package?` }
-    });
-
-    dialogRef.afterClosed().subscribe(confirm => {
-      if (confirm) {
-        this.travelPackageService.deleteTravelPackage(id).subscribe({
-          next: () => {
-            this.travelPackages = this.travelPackages.filter(item => item.id !== id);
-
-            this.alertService.showAlert('Travel package removed successfully!', 'success');
-          },
-          error: () => this.alertService.showAlert('Could not remove travel package, please try again later.', 'error')
-        });
-      }
-    });
+    })
+      .afterClosed()
+      .subscribe(confirm => {
+        if (confirm) {
+          this.travelPackageService.deleteTravelPackage(id).subscribe({
+            next: () => {
+              this.alertService.showAlert('Travel package removed successfully!', 'success');
+              this.getTravelPackages();
+            },
+            error: () => this.alertService.showAlert('Could not remove travel package, please try again later.', 'error')
+          });
+        }
+      });
   }
 }

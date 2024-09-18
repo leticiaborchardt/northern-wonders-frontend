@@ -2,14 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: "Lora", "Helvetica Neue", sans-serif !important;
-}
-
 html,
 body {
   height: 100%;
   margin: 0;
+  font-family: "Lora", "Helvetica Neue", sans-serif !important;
   @apply text-stone-800;
 }
 
@@ -17,16 +14,20 @@ body {
   @apply text-red-500 text-sm;
 }
 
-.btn-primary {
-  @apply text-white bg-sky-500 hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2;
-
-  &.btn-success {
-    @apply bg-green-700 hover:bg-green-800 focus:ring-green-300;
-  }
+.btn {
+  @apply font-medium rounded-sm text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 w-fit;
 }
 
-.btn-secondary {
-  @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700;
+.btn-success {
+  @apply text-teal-700 hover:text-white border border-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300;
+}
+
+.btn-danger {
+  @apply text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300;
+}
+
+.btn-icon {
+  @apply inline-flex items-center gap-2;
 }
 
 ::-webkit-scrollbar-track {
@@ -44,14 +45,14 @@ body {
 }
 
 .success-snackbar {
-  --mdc-snackbar-container-color: green !important;
+  --mdc-snackbar-container-color: rgb(125, 189, 151) !important;
   --mdc-snackbar-supporting-text-color: white !important;
   --mat-mdc-snack-bar-button-color: white !important;
   white-space: pre-wrap
 }
 
 .error-snackbar {
-  --mdc-snackbar-container-color: red !important;
+  --mdc-snackbar-container-color: rgb(236, 127, 127) !important;
   --mdc-snackbar-supporting-text-color: white !important;
   --mat-mdc-snack-bar-button-color: white !important;
   white-space: pre-wrap

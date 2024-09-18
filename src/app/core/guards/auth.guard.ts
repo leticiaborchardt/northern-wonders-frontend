@@ -6,7 +6,6 @@ export const authGuard: CanActivateChildFn = (childRoute, state) => {
   if (inject(AuthService).isLoggedIn()) {
     return true;
   }
-
-  inject(Router).navigate(['/login'], { queryParams: { stateUrl: state.url }});
-  return false;
+    
+  return inject(Router).createUrlTree(['/login'], { queryParams: { stateUrl: state.url }});;
 };

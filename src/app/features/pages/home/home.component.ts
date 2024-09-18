@@ -4,11 +4,12 @@ import { NavbarComponent } from '../../../core/components/navbar/navbar.componen
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FooterComponent } from "../../../core/components/footer/footer.component";
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, NavbarComponent, CommonModule, ScrollingModule, FooterComponent],
+  imports: [RouterLink, NavbarComponent, CommonModule, ScrollingModule, FooterComponent, MatIcon],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

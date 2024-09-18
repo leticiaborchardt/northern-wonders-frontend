@@ -66,6 +66,14 @@ export class TravelPackageModalComponent implements OnInit {
     this.destinationService.getDestinations().subscribe({
       next: (response: Destination[]) => {
         this.destinations = response;
+
+        if (this.data) {
+          const selectedDestination = this.destinations.find(dest => dest.id === this.data?.destination?.id);
+          
+          if (selectedDestination) {
+            this.travelPackageForm.patchValue({ destination: selectedDestination });
+          }
+        }
       },
       error: () => {
         this.alertService.showAlert('Unable to load destinations, please try again later.', 'error');

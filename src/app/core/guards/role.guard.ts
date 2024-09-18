@@ -10,6 +10,5 @@ export const roleGuard: CanActivateChildFn = (childRoute, state) => {
     return true;
   }
 
-  inject(Router).navigate(['/unauthorized']);
-  return false;
+  return inject(Router).createUrlTree(['/unauthorized']);
 };

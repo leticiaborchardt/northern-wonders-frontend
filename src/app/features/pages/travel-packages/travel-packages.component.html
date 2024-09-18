@@ -1,6 +1,6 @@
 <div>
   <header class="mb-12 flex justify-between items-center">
-    <div>
+    <div class="flex-1">
       <h1 class="text-3xl font-bold mb-4">Travel Packages</h1>
       <p class="max-w-[70%]">
         Do you want to enjoy a long weekend in Iceland, drive around the island in seven days,
@@ -8,43 +8,51 @@
         here we got some travel packages for you.
       </p>
     </div>
-    <button (click)="openCreateModal()" type="button" class="px-5 py-2.5 justify-center font-medium text-white inline-flex items-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-sm text-center">
-      <svg class="size-5 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
-      </svg>
-      Create New Travel Package
-    </button>
+    <div class="flex justify-end">
+      <button *appHasPermission="'ADMIN'" (click)="openCreateModal()" type="button" class="btn btn-icon btn-success">
+        <mat-icon>add</mat-icon>
+        New Register
+      </button>
+    </div>
   </header>
+
+  <div *ngIf="loading" class="flex items-center gap-3">
+    <mat-spinner [diameter]="30"></mat-spinner>
+    <span class="text-sm">Loading...</span>
+  </div>
 
   <section class="mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
     <div *ngFor="let travelPackage of travelPackages" class="w-80 bg-white shadow-md rounded-md duration-500 hover:scale-105 hover:shadow-xl flex">
       <div class="h-full cursor-pointer">
-        <img src="{{travelPackage.imageUrl}}" alt="Landscape" class="h-60 w-80 object-cover rounded-t-md" />
-        <div class="p-4 w-80 flex flex-col">
-          <span class="text-stone-500 text-xs truncate">{{travelPackage.destination.city}} - {{travelPackage.destination.region}}</span>
-          <h2 class="text-lg font-bold truncate block capitalize my-3">{{travelPackage.name}}</h2>
-          <div class="flex items-center my-4">
-            <svg class="size-5 text-stone-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+        <div (click)="openDetailsPage(travelPackage.id!)">
+          <img *ngIf="travelPackage.imageUrl; else noPicture" src="{{travelPackage.imageUrl}}" alt="Landscape" class="h-60 w-80 object-cover rounded-t-md" />
+          <ng-template #noPicture>
+            <svg class="pt-6 h-60 w-80 object-cover rounded-t-md dark:text-stone-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+              <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
             </svg>
-            <p class="text-sm text-stone-600 cursor-auto ml-2">{{travelPackage.startDate | date}} - {{travelPackage.endDate | date}}</p>
+          </ng-template>
+          <div class="p-4 w-80 flex flex-col">
+            <span class="text-stone-500 text-xs truncate">{{travelPackage.destination.city}} - {{travelPackage.destination.region}}</span>
+            <h2 class="text-lg font-bold truncate block capitalize my-3">{{travelPackage.name}}</h2>
+            <div class="flex items-center my-4 text-stone-500">
+              <mat-icon>calendar_month</mat-icon>
+              <p class="text-sm text-stone-600 cursor-auto ml-2">{{travelPackage.startDate | date}} - {{travelPackage.endDate | date}}</p>
+            </div>
           </div>
         </div>
         <div *appHasPermission="'ADMIN'" class="flex justify-center gap-4 z-40 mb-6">
-          <button (click)="openEditModal(travelPackage)" type="button" class="text-teal-700 hover:text-white border border-teal-700 hover:bg-teal-800  focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
-            </svg>
+          <button (click)="openEditModal(travelPackage)" type="button" class="btn btn-icon btn-success">
+            <mat-icon>edit</mat-icon>
             Update
           </button>
-          <button (click)="deleteTravelPackage(travelPackage.id!)" type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800  focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-            </svg>
+          <button (click)="deleteTravelPackage(travelPackage.id!)" type="button" class="btn btn-icon btn-danger">
+            <mat-icon>delete</mat-icon>
             Delete
           </button>
         </div>
       </div>
     </div>
   </section>
+
+  <app-no-data-found *ngIf="travelPackages.length < 1"></app-no-data-found>
 </div>

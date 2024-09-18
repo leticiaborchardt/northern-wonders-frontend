@@ -1,5 +1,7 @@
-<app-navbar [showBackground]="true"></app-navbar>
-<main class="container my-16">
-  <router-outlet></router-outlet>
-</main>
-<app-footer></app-footer>
+<div class="h-screen flex flex-col justify-between">
+  <app-navbar [showBackground]="true"></app-navbar>
+  <main class="container my-16 flex-1">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer></app-footer>
+</div>

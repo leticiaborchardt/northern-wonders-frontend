@@ -15,6 +15,10 @@ export class TravelPackageService {
     return this.httpClient.get<TravelPackage[]>(this.url);
   }
 
+  getTravelPackageById(id: string): Observable<TravelPackage> {
+    return this.httpClient.get<TravelPackage>(`${this.url}/${id}`);
+  }
+
   createTravelPackage(travelPackage: TravelPackage): Observable<TravelPackage> {
     return this.httpClient.post<TravelPackage>(this.url, travelPackage);
   }

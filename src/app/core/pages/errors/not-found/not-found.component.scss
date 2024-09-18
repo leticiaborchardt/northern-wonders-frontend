@@ -1,0 +1,4 @@
+.bg-image {
+  @apply h-screen relative bg-no-repeat bg-cover bg-fixed;
+  background-image: url('../../../../../../public/assets/home-bg.jpeg');
+}

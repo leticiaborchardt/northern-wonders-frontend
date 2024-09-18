@@ -3,10 +3,8 @@
     <img class="h-10" alt="logo" src="/assets/logo.png" [ngClass]="{'hidden': isNavbarOpen}">
   </a>
   <div class="lg:hidden">
-    <button (click)="toggleNavbar()" class="navbar-burger flex items-center text-stone-600 p-3">
-      <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-      </svg>
+    <button (click)="toggleNavbar()" class="h-6 w-6 p-3 text-slate-700 cursor-pointer hover:text-slate-900">
+      <mat-icon>menu</mat-icon>
     </button>
   </div>
   <ul class="h-full px-8 rounded-b-3xl hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-12 text-stone-700 text-sm">
@@ -51,10 +49,8 @@
       <a class="mr-auto text-3xl font-bold leading-none" routerLink="/home">
         <img class="h-10" alt="logo" src="/assets/logo.png">
       </a>
-      <button (click)="toggleNavbar()">
-        <svg class="h-6 w-6 text-slate-700 cursor-pointer hover:text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
+      <button (click)="toggleNavbar()" class="h-6 w-6 text-slate-700 cursor-pointer hover:text-slate-900">
+        <mat-icon>close</mat-icon>
       </button>
     </div>
     <ul *ngIf="isUserLoggedIn()">
