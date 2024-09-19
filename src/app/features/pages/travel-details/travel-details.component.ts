@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TravelPackage } from '../../../core/models/travel-package.model';
 import { TravelPackageService } from '../../services/travel-package.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AlertService } from '../../../core/services/alert.service';
 import { CommonModule } from '@angular/common';
 import { NoDataFoundComponent } from '../../components/no-data-found/no-data-found.component';
@@ -10,7 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-travel-details',
   standalone: true,
-  imports: [CommonModule, NoDataFoundComponent, MatIcon],
+  imports: [CommonModule, NoDataFoundComponent, MatIcon, RouterLink],
   templateUrl: './travel-details.component.html',
   styleUrl: './travel-details.component.scss'
 })

@@ -3,62 +3,66 @@
     <h1 class="text-2xl font-bold text-center sm:text-5xl">{{travelPackage.name}}</h1>
     <p class="max-w-3xl mx-auto mt-4 text-lg text-center ">{{travelPackage.description}}</p>
   </div>
+
   <div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-    <div>
-      <div class="mt-4 space-y-12">
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <div class="flex items-center justify-center w-12 h-12 rounded-md">
-              <mat-icon>location_on</mat-icon>
-            </div>
-          </div>
-          <div class="ml-4">
-            <h4 class="text-lg font-medium">Destination</h4>
-            <p class="mt-2 ">{{travelPackage.destination.city}} - {{travelPackage.destination.region}}</p>
+    <div class="flex items-center justify-center h-full">
+      <img src="{{travelPackage.imageUrl}}" class="w-full h-full object-cover rounded-sm shadow-lg dark-bg-gray-500">
+    </div>
+    <div class="mt-4 space-y-12">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-12 h-12 rounded-md">
+            <mat-icon>location_on</mat-icon>
           </div>
         </div>
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <div class="flex items-center justify-center w-12 h-12 rounded-md">
-              <mat-icon>flights_and_hotels</mat-icon>
-            </div>
-          </div>
-          <div class="ml-4">
-            <h4 class="text-lg font-medium">Flights and Hotel</h4>
-            <p class="mt-2 leading-7">
-              <b>Airline:</b> {{travelPackage.airline}} <br>
-              <b>Flight Number:</b> {{travelPackage.flightNumber}} <br>
-              <b>Hotel:</b> {{travelPackage.hotelName}}
-            </p>
+        <div class="ml-4">
+          <h4 class="text-lg font-medium">Destination</h4>
+          <p class="mt-2 ">{{travelPackage.destination.city}} - {{travelPackage.destination.region}}</p>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-12 h-12 rounded-md">
+            <mat-icon>flights_and_hotels</mat-icon>
           </div>
         </div>
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <div class="flex items-center justify-center w-12 h-12 rounded-md">
-              <mat-icon>calendar_month</mat-icon>
-            </div>
-          </div>
-          <div class="ml-4">
-            <h4 class="text-lg font-medium">Travel date</h4>
-            <p class="mt-2">{{ travelPackage.startDate | date }} - {{travelPackage.endDate | date}}</p>
+        <div class="ml-4">
+          <h4 class="text-lg font-medium">Flights and Hotel</h4>
+          <p class="mt-2 leading-7">
+            <b>Airline:</b> {{travelPackage.airline}} <br>
+            <b>Flight Number:</b> {{travelPackage.flightNumber}} <br>
+            <b>Hotel:</b> {{travelPackage.hotelName}}
+          </p>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-12 h-12 rounded-md">
+            <mat-icon>calendar_month</mat-icon>
           </div>
         </div>
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <div class="flex items-center justify-center w-12 h-12 rounded-md">
-              <mat-icon>payments</mat-icon>
-            </div>
+        <div class="ml-4">
+          <h4 class="text-lg font-medium">Travel date</h4>
+          <p class="mt-2">{{ travelPackage.startDate | date }} - {{travelPackage.endDate | date}}</p>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-12 h-12 rounded-md">
+            <mat-icon>payments</mat-icon>
           </div>
-          <div class="ml-4">
-            <h4 class="text-lg font-medium leadi ">Estimated price</h4>
-            <p class="mt-2">{{travelPackage.price | currency}}</p>
-          </div>
+        </div>
+        <div class="ml-4">
+          <h4 class="text-lg font-medium leadi ">Estimated price</h4>
+          <p class="mt-2">{{travelPackage.price | currency}}</p>
         </div>
       </div>
     </div>
-    <div aria-hidden="true" class="mt-10 lg:mt-0 w-full">
-      <img src="{{travelPackage.imageUrl}}" class="w-full h-auto mx-auto rounded-sm shadow-lg dark-bg-gray-500" style="color:transparent">
-    </div>
+  </div>
+  <div class="flex justify-end">
+    <a routerLink="/travel-packages" type="button" class="btn text-stone-900 hover:text-white border border-stone-800 hover:bg-stone-900 mt-8">
+      Back to List
+    </a>
   </div>
 </div>
 

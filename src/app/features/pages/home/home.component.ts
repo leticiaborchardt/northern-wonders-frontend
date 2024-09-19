@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit {
   cards = [
     {
       id: 1,
-      place: 'Reykjavík',
-      title: 'The Capital City',
-      image: 'https://images.prismic.io/visiticeland/fed7e105-3226-4c2f-a764-78f5863ca6ba_reykjavik.png?auto=compress,format'
+      place: 'Gullfoss',
+      title: 'The Golden Waterfall',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTSk2vN8FbYPoanlqTPFi7ZGNVdCnlOa1E7Q&s'
     },
     {
       id: 2,
@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
     },
     {
       id: 3,
-      place: 'Gullfoss',
-      title: 'The Golden Waterfall',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTSk2vN8FbYPoanlqTPFi7ZGNVdCnlOa1E7Q&s'
+      place: 'Reykjavík',
+      title: 'The Capital City',
+      image: 'https://images.prismic.io/visiticeland/fed7e105-3226-4c2f-a764-78f5863ca6ba_reykjavik.png?auto=compress,format'
     },
     {
       id: 4,

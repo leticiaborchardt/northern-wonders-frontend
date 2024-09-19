@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HasPermissionDirective } from '../../directives/has-permission.directive';
 import { MatIcon } from '@angular/material/icon';
@@ -8,7 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, HasPermissionDirective, MatIcon],
+  imports: [CommonModule, RouterLink, RouterLinkActive, HasPermissionDirective, MatIcon],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
