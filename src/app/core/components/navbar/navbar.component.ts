@@ -41,8 +41,7 @@ export class NavbarComponent implements OnInit {
         this.checkUserLoggedIn();
 
         window.location.reload();
-      },
-      error: (error) => console.log(error)
+      }
     });
   }
 
